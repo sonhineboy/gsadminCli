@@ -5,7 +5,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
-const Version = "v0.0.1"
+const Version = "v0.1.2"
 
 func Execute() {
 	rootCmd := &cobra.Command{
@@ -21,10 +21,24 @@ func Execute() {
 		},
 	)
 
-	command := &commands.MakeValidatorCommand{GroupId: Validator.ID}
+	validator := commands.NewMakeValidatorCommand(Validator.ID)
+	request := commands.NewMakeRequestCommand(Validator.ID)
+	event := commands.NewMakeEventCommand(Validator.ID)
+	listener := commands.NewMakeListenerCommand(Validator.ID)
+	controller := commands.NewMakeControllerCommand(Validator.ID)
+	repository := commands.NewMakeRepositoryCommand(Validator.ID)
+	model := commands.NewMakeModelCommand(Validator.ID)
+
 	rootCmd.AddCommand(
-		command.Command(),
+		validator.Command(),
+		request.Command(),
+		event.Command(),
+		listener.Command(),
+		controller.Command(),
+		repository.Command(),
+		model.Command(),
 	)
+
 	err := rootCmd.Execute()
 	if err != nil {
 		return

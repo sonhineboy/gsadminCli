@@ -13,7 +13,7 @@ type {{.Name}}Validator struct {
 }
 
 func (d *{{.Name}}Validator) TagName() string {
-	return "{{.Name}}"
+	return "{{.Name | }}"
 }
 
 func (d *{{.Name}}Validator) Messages() string {

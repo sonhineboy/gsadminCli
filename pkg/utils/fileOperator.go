@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"os"
 	"path"
-	"regexp"
 	"strings"
 )
 
@@ -42,10 +41,10 @@ func (o *FileOperator) setName(name string) {
 	o.Name = name
 }
 
-func (o *FileOperator) NameToTitle() string {
-	regx, _ := regexp.Compile("[Vv]alidator")
-	if regx.MatchString(o.Name) {
-		o.setName(strings.ReplaceAll(strings.ToLower(o.Name), "validator", ""))
+func (o *FileOperator) NameToTitle(hasStr string) string {
+	lowerName := strings.ToLower(o.Name)
+	if strings.Contains(lowerName, hasStr) {
+		o.setName(strings.ReplaceAll(lowerName, hasStr, ""))
 	}
 	return fmt.Sprint(strings.ToUpper(o.Name[:1]), o.Name[1:])
 }
