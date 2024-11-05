@@ -1,7 +1,7 @@
 package tmp
 
 func ControllerTmp() string {
-	return `package genExample
+	return `package {{.Package}}
 import (
 	"github.com/gin-gonic/gin"
 )
