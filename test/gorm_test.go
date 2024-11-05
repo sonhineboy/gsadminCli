@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
+	"strings"
 	"testing"
 )
 
@@ -27,4 +28,10 @@ func TestCumulus(t *testing.T) {
 		fmt.Println(columnType.Name())
 		fmt.Println(columnType.DefaultValue())
 	}
+}
+
+func TestStrings(t *testing.T) {
+
+	fmt.Println(strings.Repeat("aaa", 2))
+
 }

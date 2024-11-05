@@ -9,6 +9,8 @@ import (
 
 type {{.Name}} struct {
 	global.GAD_MODEL
+	{{range .Fields}}{{. | transField}}
+	{{end}}
 }
 
 func (m *{{.Name}}) TableName() string {

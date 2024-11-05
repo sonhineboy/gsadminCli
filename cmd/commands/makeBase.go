@@ -4,9 +4,9 @@ import (
 	"fmt"
 	utils2 "github.com/sonhineboy/gsadminCli/pkg/utils"
 	"github.com/spf13/cobra"
-	"html/template"
 	"os"
 	"strings"
+	"text/template"
 )
 
 type tmpFunc func() string
@@ -59,7 +59,7 @@ func (m *MakeBaseCommand) Command() *cobra.Command {
 }
 
 func (m *MakeBaseCommand) Run(cmd *cobra.Command, args []string) {
-	err := utils2.CreateFilCallBack(args[0], func(operatorFile *utils2.FileOperator, file *os.File) error {
+	err := utils2.CreateFileCallBack(args[0], func(operatorFile *utils2.FileOperator, file *os.File) error {
 
 		funcMap := template.FuncMap{
 			"toLower": strings.ToLower,

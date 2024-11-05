@@ -11,7 +11,8 @@ func GetPackage(dir string) string {
 	return dirs[len(dirs)-1]
 }
 
-func CreateFilCallBack(allPath string, fn func(operatorFile *FileOperator, file *os.File) error) error {
+// CreateFileCallBack 创建文件回调
+func CreateFileCallBack(allPath string, fn func(operatorFile *FileOperator, file *os.File) error) error {
 	f := FileOperator{AllPath: allPath}
 	f.ParseExtAndSet()
 	f.ParseName()
@@ -30,4 +31,21 @@ func CreateFilCallBack(allPath string, fn func(operatorFile *FileOperator, file 
 		_ = w.Close()
 	}(w)
 	return fn(&f, w)
+}
+
+// ToCamelCase 下划线风格转换大小驼峰风格
+func ToCamelCase(s string, capitalizeFirst bool) string {
+	words := strings.Split(s, "_")
+	for i, word := range words {
+		if len(word) > 0 {
+			words[i] = strings.ToUpper(word[:1]) + strings.ToLower(word[1:])
+		}
+	}
+	result := strings.Join(words, "")
+
+	if !capitalizeFirst && len(result) > 0 {
+		// 如果需要小驼峰格式，将首字母改为小写
+		result = strings.ToLower(result[:1]) + result[1:]
+	}
+	return result
 }
